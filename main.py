@@ -5,4 +5,5 @@ inputData = [9, 8, 7]
 
 training = TrainingData(inputData, 4)
 training.create_training_list()
+training.create_bool_function_results()
 training.print_result()
