@@ -21,9 +21,9 @@ def lineplot(x_data, y_data, x_label="", y_label="", title=""):
 
 
 class Network(object):
-    def __init__(self, input_data, output_data):
-        self._input_data = input_data
-        self._output_data = output_data
+    def __init__(self, input_data: list, output_data: list):
+        self._input_data = np.array(input_data)
+        self._output_data = np.array(output_data).T
         # сделаем случайные числа более определёнными
         np.random.seed(1)
         # инициализируем веса случайным образом со средним 0
@@ -61,5 +61,5 @@ class Network(object):
 
     def _get_sigmoid_prime(self, x):
         """Производная сигмоиды."""
-        return self._get_sigmoid(x) * (1 - self._get_sigmoid(x))
-        # return x * (1 - x)
+        # return self._get_sigmoid(x) * (1 - self._get_sigmoid(x))
+        return x * (1 - x)

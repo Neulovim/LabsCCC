@@ -4,31 +4,36 @@ from data import TrainingData
 from network import Network
 
 
-def print_value(value, digits=2):
-    print(f"%.{digits}f" % value)
+def print_number(number, digits=2):
+    print(f"%.{digits}f" % number)
 
 
 # inputData = [5, 4, 3]
-inputData = [9, 8, 7]
+initialData = [9, 8, 7]
 
-training = TrainingData(inputData, 4)
-training.create_training_list()
-training.create_bool_function_results()
+training = TrainingData(initialData, 4)
+inputData = training.get_training_list()
+outputData = training.get_bool_function_results()
 
 training.print_result()
 
 # набор входных данных
-X = np.array([[0, 0, 1],
-              [0, 1, 1],
-              [1, 0, 1],
-              [1, 1, 1]])
+X = [[0, 0, 1],
+     [0, 1, 1],
+     [1, 0, 1],
+     [1, 1, 1]]
 
 # выходные данные
-y = np.array([[0, 0, 1, 1]]).T
+y = [[0, 0, 1, 1]]
 
-network = Network(X, y)
+network = Network(inputData, outputData)
 result = network.get_network_results()
 
-print("Results")
+countNumbersLessOne = 0
+print("Results: ")
 for value in result:
-    print_value(value, 8)
+    if value < 1:
+        print_number(value, 16)
+        countNumbersLessOne += 1
+
+print(f"countNumbersLessOne: {countNumbersLessOne}")

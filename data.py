@@ -16,7 +16,7 @@ class TrainingData:
             line[column_number_to_change] += number_to_change
         return new_data_lines
 
-    def create_training_list(self):
+    def get_training_list(self):
         first_lines = self._preparing_first_lines(self._input_data, 2)
         self._add_missing_lines(first_lines, self._training_data)
 
@@ -28,12 +28,16 @@ class TrainingData:
 
         print("_training_data:")
         print(self._training_data)
+        return self._training_data
 
-    def create_bool_function_results(self):
+    def get_bool_function_results(self):
+        self._training_data = []
+        self.get_training_list()
         self._create_function_results()
-        self._bool_function_results = [1 if value > 0 else 0 for value in self._function_results]
+        self._bool_function_results = [[1 if value > 0 else 0 for value in self._function_results]]
         print("_bool_function_results:")
         print(self._bool_function_results)
+        return self._bool_function_results
 
     def print_result(self):
         print("_input_data: ")
@@ -44,6 +48,8 @@ class TrainingData:
         print(len(self._function_results))
         print("len _bool_function_results: ")
         print(len(self._bool_function_results))
+        print("len _bool_function_results[0]: ")
+        print(len(self._bool_function_results[0]))
 
     def _create_function_results(self):
         self._function_results = [math.tan(line[0]) + math.sin(line[1]) - math.sin(line[2])
