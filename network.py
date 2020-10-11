@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import copy
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -25,14 +27,14 @@ class Network(object):
         # сделаем случайные числа более определёнными
         np.random.seed(1)
         # инициализируем веса случайным образом со средним 0
-        self._syn0 = 0
+        self._syn0 = 2 * np.random.random((3, 1)) - 1
 
     def get_network_results(self):
-        self._syn0 = 2 * np.random.random((3, 1)) - 1
         for iteration in range(10000):
             # прямое распространение
             l0 = self._input_data
-            l1 = self._get_sigmoid_prime(np.dot(l0, self._syn0))
+            l1 = self._get_sigmoid(np.dot(l0, self._syn0))
+
             # if iteration == 9999:
             #     print(l1_delta)
             #     print(np.dot(l0, syn0))
@@ -43,13 +45,14 @@ class Network(object):
 
             # перемножим это с наклоном сигмоиды
             # на основе значений в l1
-            l1_delta = l1_error * self._get_sigmoid(l1)  # !!!
+            l1_delta = l1_error * self._get_sigmoid_prime(l1)  # !!!
 
             # обновим веса
             self._syn0 += np.dot(l0.T, l1_delta)  # !!!
 
         print("Выходные данные после тренировки:")
         print(l1)
+        return l1
 
     @staticmethod
     def _get_sigmoid(x):
