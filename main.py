@@ -29,11 +29,11 @@ y = [[0, 0, 1, 1]]
 network = Network(inputData, outputData)
 result = network.get_network_results()
 
-countNumbersLessOne = 0
-print("Results: ")
-for value in result:
-    if value < 1:
-        print_number(value, 16)
-        countNumbersLessOne += 1
-
-print(f"countNumbersLessOne: {countNumbersLessOne}")
+# countNumbersLessOne = 0
+# print("Results: ")
+# for value in result:
+#     if value < 1:
+#         print_number(value, 16)
+#         countNumbersLessOne += 1
+#
+# print(f"countNumbersLessOne: {countNumbersLessOne}")

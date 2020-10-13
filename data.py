@@ -34,7 +34,11 @@ class TrainingData:
         self._training_data = []
         self.get_training_list()
         self._create_function_results()
-        self._bool_function_results = [[1 if value > 0 else 0 for value in self._function_results]]
+        function_results_sum = sum(self._function_results)
+        # for element in self._function_results:
+        #     function_results_sum += element
+        function_results_avg = function_results_sum / len(self._function_results)
+        self._bool_function_results = [[1 if value > function_results_avg else 0 for value in self._function_results]]
         print("_bool_function_results:")
         print(self._bool_function_results)
         return self._bool_function_results
