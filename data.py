@@ -30,9 +30,9 @@ class TrainingData:
         print(self._training_data)
         return self._training_data
 
-    def get_bool_function_results(self):
-        self._training_data = []
-        self.get_training_list()
+    def get_bool_function_results(self, training_data):
+        self._training_data = training_data
+        # self.get_training_list()
         self._create_function_results()
         function_results_sum = sum(self._function_results)
         # for element in self._function_results:
