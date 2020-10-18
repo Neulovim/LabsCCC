@@ -120,18 +120,18 @@ if __name__ == '__main__':
                   [7, 8, 6]])
     y = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1])
 
-    nn.fit(X, y, epochs=300000) # 20000
-    x_pred = np.array([[7, 8, 8],
+    nn.fit(X, y, epochs=190001) # 20000
+    x_test = np.array([[7, 8, 8],
                        [7, 7, 7],
                        [7, 7, 6],
                        [7, 7, 8],
                        [7, 9, 7],
                        [7, 9, 6],
                        [7, 9, 8]])
-    y_pred = np.array([1, 1, 1, 1, 1, 1, 1])
-    for elem in range(len(x_pred) - 1):
-        print(x_pred[elem], nn.predict(x_pred[elem]), y_pred[elem])
-    # for elem in range(len(X) - 1):
+    y_test = np.array([1, 1, 1, 1, 1, 1, 1])
+    for elem in range(len(x_test)):
+        print(x_test[elem], nn.predict(x_test[elem]), y_test[elem])
+    # for elem in range(len(X)):
     #     print(X[elem], nn.predict(X[elem]), y[elem])
 
     x = np.array(
@@ -264,6 +264,6 @@ if __name__ == '__main__':
          1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0,
          0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
          1])
-    nn.fit(X, y, epochs=60000)
-    for elem in range(len(x) - 1):
-        print(x[elem], nn.predict(x[elem]), y[elem])
+    nn.fit(X, y, epochs=60001)
+    for elem in range(len(x)):
+        print(x[elem], np.abs(nn.predict(x[elem])), y[elem])
