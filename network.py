@@ -28,9 +28,11 @@ class Network(object):
         self.M = 2
         # сделаем случайные числа более определёнными
         np.random.seed(1)
+
+        self.k = 0.02
         # инициализируем веса случайным образом со средним 0
-        self._syn0 = 0.2 * np.random.random((3, 12)) - 0.1
-        self._syn1 = 0.2 * np.random.random((12, 1)) - 0.1
+        self._syn0 = self.k * np.random.random((3, 12)) - self.k / 2
+        self._syn1 = self.k * np.random.random((12, 1)) - self.k / 2
         # print(self._syn0)
         # print(self._syn1)
 
@@ -38,7 +40,7 @@ class Network(object):
         l0 = []
         l1 = []
         l2 = []
-        for iteration in range(600000):
+        for iteration in range(600001):
             # прямое распространение
             # проходим вперёд по слоям 0, 1 и 2
             l0 = self._input_data
