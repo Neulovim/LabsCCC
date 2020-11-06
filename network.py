@@ -40,7 +40,7 @@ class Network(object):
         l0 = []
         l1 = []
         l2 = []
-        for iteration in range(600001):
+        for iteration in range(500001):
             # прямое распространение
             # проходим вперёд по слоям 0, 1 и 2
             l0 = self._input_data
