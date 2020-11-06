@@ -24,11 +24,12 @@ class Network(object):
     def __init__(self, input_data: list, output_data: list):
         self._input_data = np.array(input_data)
         self._output_data = np.array(output_data).T
+        self.N = 0.1
         # сделаем случайные числа более определёнными
         np.random.seed(1)
         # инициализируем веса случайным образом со средним 0
-        self._syn0 = 2 * np.random.random((3, 3)) - 1
-        self._syn1 = 2 * np.random.random((3, 1)) - 1
+        self._syn0 = 0.2 * np.random.random((3, 12)) - 0.1
+        self._syn1 = 0.2 * np.random.random((12, 1)) - 0.1
         # print(self._syn0)
         # print(self._syn1)
 
@@ -36,7 +37,7 @@ class Network(object):
         l0 = []
         l1 = []
         l2 = []
-        for iteration in range(60000):
+        for iteration in range(600000):
             # прямое распространение
             # проходим вперёд по слоям 0, 1 и 2
             l0 = self._input_data
@@ -46,14 +47,14 @@ class Network(object):
             # как сильно мы ошиблись относительно нужной величины?
             l2_error = self._output_data - l2
 
-            if (iteration % 10000) == 0:
+            if (iteration % 100000) == 0:
                 print("Error:")
                 print(f"%.{16}f" % np.mean(np.abs(l2_error)))
                 # print(str(np.mean(np.abs(l2_error))))
 
             # в какую сторону нужно двигаться?
             # если мы были уверены в предсказании, то сильно менять его не надо
-            l2_delta = l2_error * self._get_sigmoid_prime(l2)
+            l2_delta = self.N * l2_error * self._get_sigmoid_prime(l2)
 
             # как сильно значения l1 влияют на ошибки в l2?
             l1_error = l2_delta.dot(self._syn1.T)
@@ -62,14 +63,14 @@ class Network(object):
             # если мы были уверены в предсказании, то сильно менять его не надо
             # перемножим это с наклоном сигмоиды
             # на основе значений в l1
-            l1_delta = l1_error * self._get_sigmoid_prime(l1)  # !!!
+            l1_delta = self.N * l1_error * self._get_sigmoid_prime(l1)  # !!!
 
             # обновим веса
             self._syn1 += l1.T.dot(l2_delta)  # !!!
             self._syn0 += l0.T.dot(l1_delta)  # !!!
 
-        print("Выходные данные после тренировки:")
-        print(l2)
+        # print("Выходные данные после тренировки:")
+        # print(l2)
         return l2
 
     @staticmethod
@@ -79,5 +80,5 @@ class Network(object):
 
     def _get_sigmoid_prime(self, x):
         """Производная сигмоиды."""
-        return self._get_sigmoid(x) * (1 - self._get_sigmoid(x))
-        # return x * (1 - x)
+        # return self._get_sigmoid(x) * (1 - self._get_sigmoid(x))
+        return x * (1 - x)
