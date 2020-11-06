@@ -25,6 +25,7 @@ class Network(object):
         self._input_data = np.array(input_data)
         self._output_data = np.array(output_data).T
         self.N = 0.1
+        self.M = 2
         # сделаем случайные числа более определёнными
         np.random.seed(1)
         # инициализируем веса случайным образом со средним 0
@@ -66,8 +67,8 @@ class Network(object):
             l1_delta = self.N * l1_error * self._get_sigmoid_prime(l1)  # !!!
 
             # обновим веса
-            self._syn1 += l1.T.dot(l2_delta)  # !!!
-            self._syn0 += l0.T.dot(l1_delta)  # !!!
+            self._syn1 += self.M * l1.T.dot(l2_delta)  # !!!
+            self._syn0 += self.M * l0.T.dot(l1_delta)  # !!!
 
         # print("Выходные данные после тренировки:")
         # print(l2)
